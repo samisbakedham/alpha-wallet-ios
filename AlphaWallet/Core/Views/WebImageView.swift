@@ -110,7 +110,9 @@ final class WebImageView: UIView {
         if url.pathExtension == "svg" {
             imageView.image = nil
 
-            if let data = try? ImageCache.default.diskStorage.value(forKey: url.absoluteString), let svgString = data.flatMap({ String(data: $0, encoding: .utf8) }) {
+            //hhh1 temp fix to get build to work
+            //if let data = try? ImageCache.default.diskStorage.value(forKey: url.absoluteString), let svgString = data.flatMap({ String(data: $0, encoding: .utf8) }) {
+            if let svgString = "" as? String, false {
                 webView.alpha = 1
                 webView.loadHTMLString(html(svgString: svgString), baseURL: nil)
             } else {
@@ -131,7 +133,8 @@ final class WebImageView: UIView {
 
                         OperationQueue.main.addOperations([op], waitUntilFinished: false)
 
-                        try? ImageCache.default.diskStorage.store(value: data, forKey: url.absoluteString)
+                        //hhh1 disabled to fix build
+                        //try? ImageCache.default.diskStorage.store(value: data, forKey: url.absoluteString)
                     }
                 }
             }
